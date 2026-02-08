@@ -1,0 +1,65 @@
+name: Selenium Cucumber CI Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        required: false
+        default: qa
+        type: choice
+        options: [qa, staging, prod]
+
+      tags:
+        description: "Cucumber Tags"
+        required: true
+        default: "@Test"
+
+jobs:
+
+  build:
+    name: Build Stage
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Project
+        run: mvn clean compile
+
+  test:
+    name: Test Stage
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Run Selenium Cucumber Tests
+        env:
+         ENV: ${{ github.event.inputs.env }}
+         TAGS: ${{ github.event.inputs.tags }}
+         
+        run: |
+          mvn test \
+           -Denv=$ENV \
+            -Dcucumber.filter.tags="$TAGS" \
+      - name: Upload Cucumber Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: target
+
