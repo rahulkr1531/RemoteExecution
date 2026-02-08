@@ -75,7 +75,7 @@ jobs:
         run: |
           mvn test \
 #            -Dbrowser=$BROWSER \
-            -Denv=$ENV \
+#            -Denv=$ENV \
             -Dcucumber.filter.tags="$TAGS" \
 #            -DthreadCount=$THREADS
 
