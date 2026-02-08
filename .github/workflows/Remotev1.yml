@@ -3,12 +3,12 @@ name: Selenium Cucumber CI Pipeline
 on:
   workflow_dispatch:
     inputs:
-      browser:
-        description: "Browser"
-        required: true
-        default: chrome
-        type: choice
-        options: [chrome, firefox, edge]
+#      browser:
+#        description: "Browser"
+#        required: true
+#        default: chrome
+#        type: choice
+#        options: [chrome, firefox, edge]
 
       env:
         description: "Environment"
@@ -22,10 +22,10 @@ on:
         required: true
         default: "@Test"
 
-      threads:
-        description: "Parallel Threads"
-        required: false
-        default: "2"
+#      threads:
+#        description: "Parallel Threads"
+#        required: false
+#        default: "2"
 
 jobs:
 
@@ -59,25 +59,25 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Start Xvfb
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
-          Xvfb :99 -screen 0 1920x1080x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
+#      - name: Start Xvfb
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y xvfb
+#          Xvfb :99 -screen 0 1920x1080x24 &
+#          echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Run Selenium Cucumber Tests
         env:
           BROWSER: ${{ github.event.inputs.browser }}
-          ENV: ${{ github.event.inputs.env }}
+#          ENV: ${{ github.event.inputs.env }}
           TAGS: ${{ github.event.inputs.tags }}
-          THREADS: ${{ github.event.inputs.threads }}
+#          THREADS: ${{ github.event.inputs.threads }}
         run: |
           mvn test \
-            -Dbrowser=$BROWSER \
+#            -Dbrowser=$BROWSER \
             -Denv=$ENV \
             -Dcucumber.filter.tags="$TAGS" \
-            -DthreadCount=$THREADS
+#            -DthreadCount=$THREADS
 
       - name: Upload Cucumber Reports
         if: always()
