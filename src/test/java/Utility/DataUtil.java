@@ -1,6 +1,5 @@
 package Utility;
 
-import CoreJava.ReflectionAPI;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.Scenario;
@@ -20,7 +19,7 @@ public class DataUtil {
     public void setData(Scenario sc) {
         String scenarioNumber = sc.getName().split("-", 2)[0];
         Map<String, Object> map = jsonToMap(new JSONObject(getJsonValue("filepath.json", scenarioNumber)));
-        new ReflectionAPI().getCommon().overrideClassFields(map);
+//        new ReflectionAPI().getCommon().overrideClassFields(map);
     }
 
     public String getJsonValue(String filePath, String key) {
