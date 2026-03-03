@@ -151,14 +151,14 @@ public class DataUtil {
         return header;
     }
 
-    public static Properties getPropValue(String filePath) {
+    public static String getPropValue(String key) {
         Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream(filePath)) {
+        try (FileInputStream fis = new FileInputStream(Constants.configFile)) {
             props.load(fis);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return props;
+        return props.getProperty(key);
     }
 
     public static void updatePropValue(String filePath, String key, String value) {

@@ -12,4 +12,5 @@ public class Constants {
     public static String password = "admin123";
     public static final long TIMEOUT = 20;
     public static final long POLLING = 500;
+    public static final String configFile = "src/test/resources/config/config.properties";
 }
