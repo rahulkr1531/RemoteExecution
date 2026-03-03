@@ -1,11 +1,10 @@
 Feature: App Test
 
 
-  @Test
+  @Test1
   Scenario: Search on Page
     When Search products on page
       | India    |
-      | Business |
 
 
   @Test
