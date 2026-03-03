@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 
 public class UtilMethods {
 
@@ -46,11 +47,12 @@ public class UtilMethods {
                 .ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))).click();
     }
+
     public static void clickElement(WebDriver driver, WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
                 .pollingEvery(Duration.ofMillis(Constants.POLLING))
                 .ignoreAll(Arrays.asList(NoSuchElementException.class, StaleElementReferenceException.class))
-                .until(ExpectedConditions.visibilityOfElementLocated( getByFromWebElement(element))).click();
+                .until(ExpectedConditions.visibilityOfElementLocated(getByFromWebElement(element))).click();
     }
 
     public static void enterText(WebDriver driver, String xpath, String value) {
@@ -59,6 +61,7 @@ public class UtilMethods {
                 .ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))).sendKeys(value);
     }
+
     public static void enterText(WebDriver driver, WebElement element, String value) {
         new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
                 .pollingEvery(Duration.ofMillis(Constants.POLLING))
@@ -66,7 +69,7 @@ public class UtilMethods {
                 .until(ExpectedConditions.visibilityOfElementLocated(getByFromWebElement(element))).sendKeys(value);
     }
 
-    public static WebElement waitForElementVisible(WebDriver driver, String xpath ) {
+    public static WebElement waitForElementVisible(WebDriver driver, String xpath) {
         return new WebDriverWait(driver, Duration.ofSeconds(Constants.TIMEOUT))
                 .pollingEvery(Duration.ofMillis(Constants.POLLING))
                 .ignoring(NoSuchElementException.class)
@@ -92,4 +95,18 @@ public class UtilMethods {
                 .ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
+
+    public static void uploadMultipleFiles(List<String> fileName, WebElement element) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < fileName.size() - 1; i++) {
+            stringBuilder.append(fileName.get(i)).append("\n");
+        }
+        stringBuilder.append(fileName.get(fileName.size() - 1));
+        element.sendKeys(stringBuilder);
+
+        element.sendKeys(String.join("\n", fileName));
+
+    }
+
 }
