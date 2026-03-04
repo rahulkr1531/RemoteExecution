@@ -14,24 +14,28 @@ import org.openqa.selenium.WebDriver;
 
 public class Hooks {
 
-
-
+    private String scenarioName;
     private static ExtentReports extent = ExtentManager.getExtent();
     private static ThreadLocal<ExtentTest> scenarioTest = new ThreadLocal<>();
 
+    public String getScenarioName() {
+        return this.scenarioName;
+    }
     @Before
     public void setUp(Scenario scenario) {
-        WebDriver driver = DriverFactory.getDriver();
-        ExtentTest test = extent.createTest(scenario.getName());
-        scenarioTest.set(test);
-        driver.get(Constants.url3);
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
+        this.scenarioName = scenario.getName().split("-")[1].trim();
+//        WebDriver driver = DriverFactory.getDriver();
+//        ExtentTest test = extent.createTest(scenario.getName());
+//        scenarioTest.set(test);
+//        driver.get(Constants.url3);
+//        driver.manage().deleteAllCookies();
+//        driver.manage().window().maximize();
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     @After
@@ -47,7 +51,7 @@ public class Hooks {
 //                    .fail("Scenario failed")
 //                    .addScreenCaptureFromPath(path);
 //        }
-       DriverFactory.quitDriver();
+//       DriverFactory.quitDriver();
     }
 
 //    @AfterAll

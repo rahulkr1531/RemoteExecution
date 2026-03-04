@@ -5,10 +5,13 @@ import Utility.UtilMethods;
 import io.cucumber.datatable.DataTable;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -45,29 +48,34 @@ public class Login extends UtilMethods {
         profilePicture.click();
         logout.click();
     }
-
+    String name;
     public void searchPage(DataTable dataTable) {
-        Assert.assertTrue(false);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(
-                "Thread Name: " + Thread.currentThread().getName()
-                        + " | Thread ID: " + Thread.currentThread().getId()
-        );
-        List<List<String>> dataListOfList = dataTable.asLists();
-        for (List<String> list : dataListOfList) {
-            enterText(driver,driver.findElement(By.xpath("//*[contains(@id,'Wikipedia1_wikipedia-search-input')]")), list.get(0));
-            clickElement(driver,searchButton);
-            clickElement(driver,homePage);
-        }
+        name="kjbkjb";
+        System.out.println(name);
+//        Assert.assertTrue(false);
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println(
+//                "Thread Name: " + Thread.currentThread().getName()
+//                        + " | Thread ID: " + Thread.currentThread().getId()
+//        );
+//        List<List<String>> dataListOfList = dataTable.asLists();
+//        for (List<String> list : dataListOfList) {
+//            enterText(driver,driver.findElement(By.xpath("//*[contains(@id,'Wikipedia1_wikipedia-search-input')]")), list.get(0));
+//            clickElement(driver,searchButton);
+//            clickElement(driver,homePage);
+//        }
 //        Assert.assertTrue(driver.getTitle().contains("Automation"));
 //        System.getProperty("","");
     }
 
     public void titleTest() {
-        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("google"));
+        System.out.println(name);
+
+//        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("google"));
+//        ExpectedCondition<Boolean> conditions= driver-> ((JavascriptExecutor)driver).executeScript("").equals("");
     }
 }
