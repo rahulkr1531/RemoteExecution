@@ -50,9 +50,8 @@ public class Login extends UtilMethods {
     }
     String name;
     public void searchPage(DataTable dataTable) {
-        name="kjbkjb";
-        System.out.println(name);
-//        Assert.assertTrue(false);
+
+        Assert.assertTrue(false);
 //        try {
 //            Thread.sleep(2000);
 //        } catch (InterruptedException e) {

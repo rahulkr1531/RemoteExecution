@@ -1,7 +1,10 @@
 package stepDefs;
 
 import Hooks.Hooks;
+import Utility.DriverFactory;
 import io.cucumber.java.en.Given;
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
 public class Parallel2 {
 
@@ -26,7 +29,10 @@ public class Parallel2 {
 
     @Given("I run feature 2 step")
     public void runFeature2Step() throws InterruptedException {
-        Thread.sleep(5000);
+        Assert.assertTrue(false);
+//        Thread.sleep(5000);
         printThreadDetails("Feature2 Step Execution");
+
+
     }
 }

@@ -1,31 +1,30 @@
 package stepDefs;//package stepDefs;//package stepDefs;
-//
-//import static io.restassured.RestAssured.*;
-//
-//import PojoClasses.DeserializePOJO;
-//import PojoClasses.PayloadPOJO;
-//import PojoFactory.HostlersDetails;
-//import PojoFactory.StudentDetails;
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import io.restassured.RestAssured;
-//import io.restassured.http.ContentType;
-//import io.restassured.http.Header;
-//import io.restassured.http.Headers;
-//import io.restassured.path.json.JsonPath;
-//import io.restassured.response.Response;
-//import io.restassured.response.ValidatableResponse;
-//import io.restassured.specification.QueryableRequestSpecification;
-//import io.restassured.specification.RequestSpecification;
-//import io.restassured.specification.SpecificationQuerier;
-//import org.testng.Assert;
-//import org.testng.annotations.*;
-//
-//import java.io.File;
-//import java.util.*;
-//
-//public class httpRequest {
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.equalTo;
+
+import PojoClasses.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonschema.JsonSchema;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.QueryableRequestSpecification;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.SpecificationQuerier;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.io.File;
+import java.util.*;
+
+public class httpRequest {
 //    RequestSpecification requestSpecification;
 //
 //    public static String getValue(JsonPath jsonPath, String objectPath, String key) {
@@ -69,16 +68,61 @@ package stepDefs;//package stepDefs;//package stepDefs;
 //
 //
 ////
-////    @Test
-////    public void testCase02() {
-////        baseURI = "https://reqres.in";
-////        given()
-////                .queryParam("page", "2")
-////                .when()
-////                .get("/api/users")
-////                .then()
-////                .statusCode(200);
-////    }
+    @Test
+    public void testCase02() {
+        baseURI = "http://localhost:3000/headers";
+         Response response = given()
+//                .queryParam("page", "2")
+                .when()
+                .get("")
+                .then()
+                .log().body().extract().response();
+
+//        response.then()
+//                .statusCode(200)
+//                .body("name", equalTo("Rahul"))
+//                .body(matchesJsonSchemaInClasspath("schema.json"));
+//
+         JsonPath jsonPath = response.jsonPath();
+//         List<Integer> idList = jsonPath.getList("id", Integer.class);
+//        System.out.println(idList);
+
+//         List<Address> addressList = jsonPath.getList("address", Address.class).stream().filter(address-> address!=null).toList();
+//         List<Map<String,String>> addressList1 = jsonPath.getList("address");
+//        System.out.println(addressList1.get(2).get("dist"));
+//        List<Address> addressList2 = jsonPath.getList("address", Address.class);
+//        System.out.println(addressList2.get(2).getDist());
+
+//        List<Object> state = jsonPath.getList("findAll { it.address?.dist == 'dist' }.address.state");
+//         List<Object> list = jsonPath.getList("findAll { it.address?.dist == 'dist1' }.address.state");
+         List<Map<String, Map<String, Object>>> locality = jsonPath.getList("findAll { it.address?.locality?.name == 'locality1' }*.address");
+//
+//        System.out.println(locality);
+        ObjectMapper mapper = new ObjectMapper();
+
+
+//        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+
+        try {
+            StudentDetails[] users = mapper.readValue(response.asString(), StudentDetails[].class);
+            List<StudentDetails> users1 =
+                    mapper.readValue(response.asString(),
+                            new TypeReference<List<StudentDetails>>() {});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 ////
 ////    @Test
 ////    public void testCase03() {
@@ -342,4 +386,9 @@ package stepDefs;//package stepDefs;//package stepDefs;
 ////        response.body().prettyPrint();
 ////
 ////    }
-//}
+
+
+}
+
+
+

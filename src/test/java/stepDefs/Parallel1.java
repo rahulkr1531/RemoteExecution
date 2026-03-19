@@ -2,6 +2,7 @@ package stepDefs;
 
 import Hooks.Hooks;
 import io.cucumber.java.en.Given;
+import org.junit.Assert;
 
 public class Parallel1 {
 
@@ -24,7 +25,8 @@ public class Parallel1 {
     }
 
     @Given("I run feature 1 step")
-    public void runFeature1Step() {
+    public void runFeature1Step() throws InterruptedException {
+//        Thread.sleep(5000);
         printThreadDetails("Feature1 Step Execution");
     }
 }

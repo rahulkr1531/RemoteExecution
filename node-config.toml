@@ -1,0 +1,8 @@
+[node]
+detect-drivers = true
+max-sessions = 4  # Limit concurrent browsers to 4
+
+[[node.driver-configuration]]
+display-name = "Chrome"
+stereotype = '{"browserName": "chrome", "browserVersion": "146"}'
+max-sessions = 2

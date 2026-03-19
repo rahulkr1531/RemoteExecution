@@ -4,14 +4,20 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 public class ShadowdomUtil {
 
-    public static SearchContext getShadowDom(String cssPath) {
+    private static WebDriver driver = DriverFactory.getDriver();
 
-        return DriverFactory.getDriver().findElement(By.cssSelector(cssPath)).getShadowRoot();
+    public static WebElement getShadowDom(List<By> shadowDomElementLocators, By targetElement) {
+        SearchContext context = driver;
+        for (int i = 0; i < shadowDomElementLocators.size(); i++) {
+            context = context.findElement(shadowDomElementLocators.get(i)).getShadowRoot();
+        }
+        return context.findElement(targetElement);
     }
 }
 

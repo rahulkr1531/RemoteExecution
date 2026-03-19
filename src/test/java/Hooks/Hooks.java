@@ -24,18 +24,18 @@ public class Hooks {
     @Before
     public void setUp(Scenario scenario) {
 
-        this.scenarioName = scenario.getName().split("-")[1].trim();
-//        WebDriver driver = DriverFactory.getDriver();
-//        ExtentTest test = extent.createTest(scenario.getName());
-//        scenarioTest.set(test);
-//        driver.get(Constants.url3);
-//        driver.manage().deleteAllCookies();
-//        driver.manage().window().maximize();
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+//        this.scenarioName = scenario.getName().split("-")[1].trim();
+        WebDriver driver = DriverFactory.getDriver();
+        ExtentTest test = extent.createTest(scenario.getName());
+        scenarioTest.set(test);
+        driver.get(Constants.url1);
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @After
@@ -51,13 +51,13 @@ public class Hooks {
 //                    .fail("Scenario failed")
 //                    .addScreenCaptureFromPath(path);
 //        }
-//       DriverFactory.quitDriver();
+       DriverFactory.quitDriver();
     }
 
-//    @AfterAll
-//    public static void flushReport() {
-//        extent.flush();
-//    }
+    @AfterAll
+    public static void flushReport() {
+        extent.flush();
+    }
 
 
 }
