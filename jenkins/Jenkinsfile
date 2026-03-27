@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing........"
-                bat "mvn test -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
+                bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
             }
         }
         stage('Report') {
@@ -33,13 +33,19 @@ pipeline {
 
                 echo "Generating Masterthought Report..."
 
-                 bat "mvn net.masterthought:maven-cucumber-reporting:generate -Dcucumber.outputDir=target -Dcucumber.jsonFiles=target/cucumber-test1.json,target/cucumber-test2.json -Dcucumber.projectName=RemoteExecution"
+                 bat """
+                    mvn net.masterthought:maven-cucumber-reporting:5.10.2:generate ^
+                    -Dcucumber.outputDir=target ^
+                    -Dcucumber.jsonFiles=target/cucumber-test1.json,target/cucumber-test2.json ^
+                    -Dcucumber.projectName=RemoteExecution
+                """
 
-                 publishHTML([
-                 reportDir: 'target/cucumber-html-reports',
-                 reportFiles: 'overview-features.html',
-                 reportName: 'Masterthought Report'
-                ])
+                publishHTML([allowMissing: false,
+                             alwaysLinkToLastBuild: true,
+                             keepAll: true,
+                             reportDir: 'target/cucumber-html-reports',
+                             reportFiles: 'overview-features.html',
+                             reportName: 'Masterthought Report'])
                 
             }
         }
