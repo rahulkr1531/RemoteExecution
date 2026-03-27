@@ -33,7 +33,7 @@ pipeline {
 
                 echo "Generating Masterthought Report..."
 
-                 bat "mvn net.masterthought:maven-cucumber-reporting:generate -Dcucumber.outputDir=target -Dcucumber.jsonFiles=target/cucumber-Test1.json,target/cucumber-Test2.json -Dcucumber.projectName=RemoteExecution"
+                 bat "mvn net.masterthought:maven-cucumber-reporting:generate -Dcucumber.outputDir=target -Dcucumber.jsonFiles=target/cucumber-test1.json,target/cucumber-test2.json -Dcucumber.projectName=RemoteExecution"
 
                  publishHTML([
                  reportDir: 'target/cucumber-html-reports',
