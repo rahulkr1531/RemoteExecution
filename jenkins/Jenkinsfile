@@ -28,8 +28,23 @@ pipeline {
         }
         stage('Report') {
             steps {
-                echo "Reporting........"
-                archiveArtifacts artifacts: 'target/*.json', fingerprint: true
+                // echo "Reporting........"
+                // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
+
+                echo "Generating Masterthought Report..."
+
+                bat """
+                mvn net.masterthought:maven-cucumber-reporting:generate ^
+                -Dcucumber.outputDir=target ^
+                -Dcucumber.jsonFiles=target/*.json ^
+                -Dcucumber.projectName=RemoteExecution
+                """
+                publishHTML([
+                    reportDir: 'target/cucumber-html-reports',
+                    reportFiles: 'overview-features.html',
+                    reportName: 'Masterthought Report'
+                ])
+                
             }
         }
     }
