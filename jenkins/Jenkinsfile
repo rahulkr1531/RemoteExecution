@@ -1,52 +1,40 @@
 pipeline {
     agent any
-
-    parameters{
+    parameters {
         choice(name: 'BROWSER', choices: ['CHROME', 'EDGE'], description: 'Select Browser')
         string(name: 'TAGS', defaultValue: '@Test1', description: 'Enter Cucumber tags')
     }
 
     stages {
-          stage('Checkout') {
+        stage('Checkout') {
             steps {
-                echo "Checking........"
                 checkout scm
             }
         }
-        
+
         stage('Build') {
             steps {
-                echo "Building........"
                 bat 'mvn clean compile'
             }
         }
+
         stage('Test') {
             steps {
-                echo "Testing........"
-                bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
+                bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=${params.TAGS}"
             }
         }
+
         stage('Report') {
             steps {
                 // echo "Reporting........"
                 // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
 
-                echo "Generating Masterthought Report..."
-
-                 bat """
-                    mvn net.masterthought:maven-cucumber-reporting:5.10.2:generate ^
-                    -Dcucumber.outputDir=target ^
-                    -Dcucumber.jsonFiles=target/cucumber-test1.json,target/cucumber-test2.json ^
-                    -Dcucumber.projectName=RemoteExecution
-                """
-
-                publishHTML([allowMissing: false,
-                             alwaysLinkToLastBuild: true,
-                             keepAll: true,
-                             reportDir: 'target/cucumber-html-reports',
-                             reportFiles: 'overview-features.html',
-                             reportName: 'Masterthought Report'])
-                
+                echo "Reports will be generated automatically in Maven verify phase"
+                publishHTML([
+                        reportDir: 'target/cucumber-reports',
+                        reportFiles: 'overview-features.html',
+                        reportName: 'Masterthought Report'
+                ])
             }
         }
     }
