@@ -2,24 +2,29 @@ pipeline {
     agent any
 
     stages {
+          stage('Checkout') {
+            steps {
+                echo "Checking........"
+                checkout scm
+            }
+        }
+        
         stage('Build') {
             steps {
                 echo "Building........"
+                sh 'mvn clean'
             }
         }
         stage('Test') {
             steps {
                 echo "Testing........"
+                sh 'mvn test'
             }
         }
-        stage('Deploy') {
+        stage('Report') {
             steps {
-                echo "Deploying........"
-            }
-        }
-        stage('Release') {
-            steps {
-                echo "Releasing........"
+                echo "Reporting........"
+                archiveArtifacts artifacts: 'target/*.json', fingerprint: true
             }
         }
     }
