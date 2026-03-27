@@ -26,10 +26,10 @@ public class TestRunner2 extends AbstractTestNGCucumberTests {
     }
 
 
-    @BeforeClass()
-    @Parameters("enableRetry")
-    public void setUpRetryFlag(String enableRetry){
-        System.setProperty("enableRetry", enableRetry);
-    }
+//    @BeforeClass()
+//    @Parameters("enableRetry")
+//    public void setUpRetryFlag(String enableRetry){
+//        System.setProperty("enableRetry", enableRetry);
+//    }
 
 }

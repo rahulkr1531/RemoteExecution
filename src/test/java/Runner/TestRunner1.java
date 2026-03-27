@@ -27,13 +27,13 @@ public class TestRunner1 extends AbstractTestNGCucumberTests {
         return super.scenarios();
     }
 
-    @BeforeClass()
-    public void setUpRetryFlag(ITestContext context) {
-        String enableRetry = context.getCurrentXmlTest().getParameter("enableRetry");
-        if (enableRetry == null)
-            enableRetry = "false";
-        System.setProperty("enableRetry", (context.getCurrentXmlTest().getParameter("enableRetry") == null ?"false":"true"));
-
-    }
+//    @BeforeClass()
+//    public void setUpRetryFlag(ITestContext context) {
+//        String enableRetry = context.getCurrentXmlTest().getParameter("enableRetry");
+//        if (enableRetry == null)
+//            enableRetry = "false";
+//        System.setProperty("enableRetry", (context.getCurrentXmlTest().getParameter("enableRetry") == null ?"false":"true"));
+//
+//    }
 
 }

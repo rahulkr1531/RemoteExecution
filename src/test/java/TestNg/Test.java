@@ -8,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-
+import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import java.util.*;
 
 public class Test {
 
-    @org.testng.annotations.Test
+//    @org.testng.annotations.Test(groups = {"bhjbkj"})
     void remoteTest() throws InterruptedException {
         WebDriver driver = DriverFactory.getDriver();
         driver.get(Constants.url1);
@@ -32,55 +34,81 @@ public class Test {
          Thread.sleep(5000);
 
     }
+
+    @org.testng.annotations.Test(priority = -1, dependsOnMethods = "Test4", alwaysRun = true, ignoreMissingDependencies = true)
+//    @org.testng.annotations.Test(priority = -1)
+    void Test1(){
+        System.out.println("Test 1");
+
+    }
+    @org.testng.annotations.Test(priority = 0, expectedExceptions = {NoSuchElementException.class})
+    void Test2(){
+        System.out.println("Test 2");
+    }
+    @org.testng.annotations.Test(priority = 1)
+    void Test3(){
+        System.out.println("Test 3");
+
+    }
+//    @org.testng.annotations.Test(priority = 2)
+//    void Test4(){
+//try {
+////    int t=1/0;
+//    Assert.fail("failed method");
+//} catch (Exception e) {
+//}
+//        System.out.println("Test 4");
+//
+//    }
 }
-
-class A12 {
-    A12(int t1) {
-        System.out.println("A");
-    }
-}
-
-class B1 extends A12 {
-    B1(int t) {
-        super(2);
-        System.out.println("B");
-    }
-
-    public static void main(String[] args) {
-        new B1(10);
-
-         Actions actions = new Actions(DriverFactory.getDriver());
-
-         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
-//         Map<Object, Object> objectObjectMap = Map.ofEntries(stringIntegerHashMap);
-        List<String> list = new ArrayList<>();
-        list.add("Java");
-
-        Employee emp = new Employee("Rahul", list);
-
-        emp.getSkills().add("Selenium");
-
-    }
-
-}
-
-final class Employee {
-
-    private final String name;
-    private final List<String> skills;
-
-    public Employee(String name, List<String> skills) {
-        this.name = name;
-        this.skills = new ArrayList<>(skills);  // defensive copy
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
-
-    public List<String> getSkills() {
-        return new ArrayList<>(skills);         // return copy
-    }
-}
+//
+//class A12 {
+//    A12(int t1) {
+//        System.out.println("A");
+//    }
+//}
+//
+//class B1 extends A12 {
+//    B1(int t) {
+//        super(2);
+//        System.out.println("B");
+//    }
+//
+//    public static void main(String[] args) {
+//        new B1(10);
+//
+//         Actions actions = new Actions(DriverFactory.getDriver());
+//
+//         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
+////         Map<Object, Object> objectObjectMap = Map.ofEntries(stringIntegerHashMap);
+//        List<String> list = new ArrayList<>();
+//        list.add("Java");
+//
+//        Employee emp = new Employee("Rahul", list);
+//
+//        emp.getSkills().add("Selenium");
+//
+//    }
+//
+//}
+//
+//final class Employee {
+//
+//    private final String name;
+//    private final List<String> skills;
+//
+//    public Employee(String name, List<String> skills) {
+//        this.name = name;
+//        this.skills = new ArrayList<>(skills);  // defensive copy
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//
+//
+//    public List<String> getSkills() {
+//        return new ArrayList<>(skills);         // return copy
+//    }
+//}

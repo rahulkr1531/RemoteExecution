@@ -4,14 +4,14 @@ Feature: Feature 1 Thread Demo
   Scenario: F1 - Scenario 1
     Given I run feature 1 step
 
-#  Scenario: F1 - Scenario 2
-#    Given I run feature 1 step
-#
-#  Scenario: F1 - Scenario 3
-#    Given I run feature 1 step
-#
-#  Scenario: F1 - Scenario 4
-#    Given I run feature 1 step
+  Scenario: F1 - Scenario 2
+    Given I run feature 1 step
+
+  Scenario: F1 - Scenario 3
+    Given I run feature 1 step
+
+  Scenario: F1 - Scenario 4
+    Given I run feature 1 step
 
 
 #  @Test

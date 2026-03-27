@@ -1,12 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Cucumber Suite" >
+<suite name="Cucumber Suite" parallel="methods" data-provider-thread-count="2">
+    <groups>
+        <run>
+<!--            <include name="smoke"/>-->
+        </run>
+    </groups>
 <listeners>
     <listener class-name="Listeners.MyTransformer" />
 </listeners>
-    <test name="Cucumber Test1">
+
+    <test name="Cucumber Test1" thread-count="2">
         <classes>
             <class name="Runner.TestRunner1"/>
-<!--            <class name="Runner.TestRunner2"/>-->
+            <class name="Runner.TestRunner2"/>
 <!--            <class name="Runner.TestRunner3"/>-->
 <!--            <class name="Runner.TestRunner4"/>-->
         </classes>
@@ -15,8 +21,10 @@
     <test name="Cucumber Test2">
         <parameter name="enableRetry" value="true"/>
         <classes>
-<!--            <class name="Runner.TestRunner1"/>-->
-                        <class name="Runner.TestRunner2"/>
+            <!--            <class name="Runner.TestRunner1"/>-->
+<!--                        <class name="Runner.TestRunner2">-->
+<!--                            <parameter name="enableRetry" value="true"/>-->
+<!--                        </class>-->
 <!--                        <class name="Runner.TestRunner3"/>-->
 <!--                        <class name="Runner.TestRunner4"/>-->
         </classes>
