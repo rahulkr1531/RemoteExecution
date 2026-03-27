@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters{
+        choice(name: 'BROWSER', choices: ['CHROME', 'EDGE'], description: 'Select Browser')
+        string(name: 'TAGS', defaultValue: '@Test1', description: 'Enter Cucumber tags')
+    }
+
     stages {
           stage('Checkout') {
             steps {
@@ -12,13 +17,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building........"
-                bat 'mvn clean'
+                bat 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
                 echo "Testing........"
-                bat 'mvn test'
+                bat "mvn test -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
             }
         }
         stage('Report') {
