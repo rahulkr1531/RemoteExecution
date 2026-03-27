@@ -13,8 +13,8 @@ import org.testng.annotations.Parameters;
         glue = {"stepDefs", "Hooks"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-html-report.html",
-                "json:target/cucumber.json"
+                "html:target/cucumber-html-report-test2.html",
+                "json:target/cucumber-test2.json"
         },
         tags = "@Test2"
 )
