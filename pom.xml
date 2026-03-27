@@ -145,6 +145,8 @@
                     <includes>
                         <include>**/*Runner*.java</include>
                     </includes>
+                    <parallel>methods</parallel>
+                    <threadCount>2</threadCount>
                     <systemPropertyVariables>
                         <cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
                     </systemPropertyVariables>
