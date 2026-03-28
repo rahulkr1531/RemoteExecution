@@ -38,7 +38,8 @@ pipeline {
                 cucumber buildStatus: 'UNSTABLE',
                          fileIncludePattern: '**/cucumber-test*.json',
                          jsonReportDirectory: 'target'
-
+              zip zipFile: 'Automation_Report.zip', dir: 'target'
+            
               archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true        }  
     }
 }
