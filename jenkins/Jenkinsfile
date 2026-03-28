@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat "mvn clean test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
+                bat "mvn clean verify -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
             }
         }
     }
@@ -31,9 +31,9 @@ pipeline {
 
             echo "Reports will be generated automatically in Maven verify phase"
 
-//            bat 'dir /s target\\*.json'
+            bat 'dir /s target\\*.json'
 //
-//            junit '**/target/surefire-reports/*.xml'
+            junit '**/target/surefire-reports/*.xml'
 //
 //            allure includeProperties: false,
 //                    jdk: '',
