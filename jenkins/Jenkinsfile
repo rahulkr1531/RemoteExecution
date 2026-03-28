@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat "bat "mvn clean verify -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=${params.TAGS}""
+                bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=${params.TAGS}""
             }
         }
 
@@ -30,11 +30,12 @@ pipeline {
                 // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
 
                 echo "Reports will be generated automatically in Maven verify phase"
-                publishHTML([
-                        reportDir: 'target/cucumber-reports',
-                        reportFiles: 'overview-features.html',
-                        reportName: 'Masterthought Report'
-                ])
+                
+                junit '**/target/surefire-reports/*.xml'
+                
+                cucumber buildStatus: 'UNSTABLE',
+                         fileIncludePattern: '**/target/cucumber-test/*.json',
+                         jsonReportDirectory: 'target/cucumber-reports'
             }
         }
     }
