@@ -42,6 +42,7 @@ pipeline {
 
               archiveArtifacts artifacts: 'Automation_Report.zip', allowEmptyArchive: true
             
-              // archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true        }  
+              // archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true      
+        }  
     }
 }
