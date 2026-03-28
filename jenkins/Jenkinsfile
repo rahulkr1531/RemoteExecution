@@ -31,18 +31,18 @@ pipeline {
 
             echo "Reports will be generated automatically in Maven verify phase"
 
-            bat 'dir /s target\\*.json'
-
-            junit '**/target/surefire-reports/*.xml'
-
-            allure includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'target/allure-results']]
-
-            cucumber buildStatus: 'UNSTABLE',
-                    fileIncludePattern: '**/cucumber-test*.json',
-                    jsonReportDirectory: 'target'
-            zip zipFile: 'Automation_Report.zip', dir: 'target'
+//            bat 'dir /s target\\*.json'
+//
+//            junit '**/target/surefire-reports/*.xml'
+//
+//            allure includeProperties: false,
+//                    jdk: '',
+//                    results: [[path: 'target/allure-results']]
+//
+//            cucumber buildStatus: 'UNSTABLE',
+//                    fileIncludePattern: '**/cucumber-test*.json',
+//                    jsonReportDirectory: 'target'
+//            zip zipFile: 'Automation_Report.zip', dir: 'target'
 
             archiveArtifacts artifacts: 'Automation_Report.zip', allowEmptyArchive: true
 
