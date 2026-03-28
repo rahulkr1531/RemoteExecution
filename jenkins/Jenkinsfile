@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
+                bat "mvn clean test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
             }
         }
     }
