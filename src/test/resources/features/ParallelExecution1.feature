@@ -1,6 +1,7 @@
-@Test1
+@Test4
 Feature: Feature 1 Thread Demo
 #
+   @Test1
   Scenario: F1 - Scenario 1
     Given I run feature 1 step
 
