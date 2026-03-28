@@ -31,11 +31,13 @@ pipeline {
 
                 echo "Reports will be generated automatically in Maven verify phase"
                 
+                bat 'dir /s target\\*.json'    
+                
                 junit '**/target/surefire-reports/*.xml'
                 
                 cucumber buildStatus: 'UNSTABLE',
-                         fileIncludePattern: '**/target/cucumber-test/*.json',
-                         jsonReportDirectory: 'target/cucumber-reports'
+                         fileIncludePattern: '**/cucumber-test*.json',
+                         jsonReportDirectory: 'target'
             }
         }
     }
