@@ -174,7 +174,7 @@
                             <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
                             <inputDirectory>${project.build.directory}</inputDirectory>
                             <jsonFiles>
-                                <param>**/*.json</param>
+                                <param>target/cucumber-*.json</param>
                             </jsonFiles>
                         </configuration>
                     </execution>
