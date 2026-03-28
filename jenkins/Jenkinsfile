@@ -39,7 +39,6 @@ pipeline {
                          fileIncludePattern: '**/cucumber-test*.json',
                          jsonReportDirectory: 'target'
 
-                archiveArtifacts artifacts: 'target/**', fingerprint: true
-        }  
+              archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true        }  
     }
 }
