@@ -21,6 +21,16 @@ pipeline {
         stage('Test') {
             steps {
                 bat "mvn clean verify -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
+
+                bat '''
+        echo Checking JSON files...
+        echo Current directory:
+        cd
+        echo Listing target folder:
+        dir target
+        echo Matching cucumber JSON:
+        dir target\\cucumber-*.json
+        '''
             }
         }
     }
@@ -33,6 +43,7 @@ pipeline {
 
             bat 'dir /s target\\*.json'
 //
+
             junit '**/target/surefire-reports/*.xml'
 //
 //            allure includeProperties: false,
