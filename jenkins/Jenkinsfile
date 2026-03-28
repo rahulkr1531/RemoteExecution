@@ -39,7 +39,9 @@ pipeline {
                          fileIncludePattern: '**/cucumber-test*.json',
                          jsonReportDirectory: 'target'
               zip zipFile: 'Automation_Report.zip', dir: 'target'
+
+              archiveArtifacts artifacts: 'Automation_Report.zip', allowEmptyArchive: true
             
-              archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true        }  
+              // archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true        }  
     }
 }
