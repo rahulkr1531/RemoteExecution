@@ -14,7 +14,8 @@ import org.testng.annotations.Test;
         plugin = {
                 "pretty",
                 "html:target/cucumber-html-report-test1.html",
-                "json:target/cucumber-test1.json"
+                "json:target/cucumber-test1.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         tags = "@Test1"
 )

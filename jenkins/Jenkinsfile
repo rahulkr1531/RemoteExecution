@@ -24,25 +24,29 @@ pipeline {
             }
         }
     }
-    post{
-        always{
+    post {
+        always {
             // echo "Reporting........"
-                // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
+            // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
 
-                echo "Reports will be generated automatically in Maven verify phase"
-                
-                bat 'dir /s target\\*.json'    
-                
-                junit '**/target/surefire-reports/*.xml'
-                
-                cucumber buildStatus: 'UNSTABLE',
-                         fileIncludePattern: '**/cucumber-test*.json',
-                         jsonReportDirectory: 'target'
-              zip zipFile: 'Automation_Report.zip', dir: 'target'
+            echo "Reports will be generated automatically in Maven verify phase"
 
-              archiveArtifacts artifacts: 'Automation_Report.zip', allowEmptyArchive: true
-            
-              // archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true      
-        }  
+            bat 'dir /s target\\*.json'
+
+            junit '**/target/surefire-reports/*.xml'
+
+            allure includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'target/allure-results']]
+
+            cucumber buildStatus: 'UNSTABLE',
+                    fileIncludePattern: '**/cucumber-test*.json',
+                    jsonReportDirectory: 'target'
+            zip zipFile: 'Automation_Report.zip', dir: 'target'
+
+            archiveArtifacts artifacts: 'Automation_Report.zip', allowEmptyArchive: true
+
+            // archiveArtifacts artifacts: 'target/*.html, target/*.json', allowEmptyArchive: true
+        }
     }
 }
