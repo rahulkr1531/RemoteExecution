@@ -23,10 +23,10 @@ pipeline {
                 bat "mvn test -DsuiteXmlFile=testng.xml -Dbrowser=${params.BROWSER} -Dcucumber.filter.tags=\"${params.TAGS}\""
             }
         }
-
-        stage('Report') {
-            steps {
-                // echo "Reporting........"
+    }
+    post{
+        always{
+            // echo "Reporting........"
                 // archiveArtifacts artifacts: 'target/*.json', fingerprint: true
 
                 echo "Reports will be generated automatically in Maven verify phase"
@@ -38,7 +38,8 @@ pipeline {
                 cucumber buildStatus: 'UNSTABLE',
                          fileIncludePattern: '**/cucumber-test*.json',
                          jsonReportDirectory: 'target'
-            }
-        }
+
+                archiveArtifacts artifacts: 'target/cucumber-html-reports/**', fingerprint: true
+        }  
     }
 }
