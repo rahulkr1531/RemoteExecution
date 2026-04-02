@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -80,3 +81,55 @@ public class DriverFactory {
     }
 
 }
+
+//class Parent {
+//    void show() throws IOException {
+//        System.out.println("Parent");
+//    }
+//}
+//
+//class Child extends Parent {
+//    void show() {
+//        System.out.println("Child");
+//    }
+//}
+//
+//class Parent {
+//    void show(Object o) {
+//        System.out.println("Parent Object");
+//    }
+//    void show(String s) {
+//        System.out.println("Parent String");
+//    }
+//}
+//
+//class Child extends Parent {
+//    void show(String s) {
+//        System.out.println("Child String");
+//    }
+//
+//    void show(Integer i) {
+//        System.out.println("Child Integer");
+//    }
+//}
+//
+// class Test1 {
+//    public static void main(String[] args) {
+//        Child obj = new Child();
+////        obj.show(null);
+//    }
+//}
+
+interface IA {
+    default void show() { System.out.println("IA"); }
+}
+
+class Parent {
+    void show() { System.out.println("Parent"); }
+}
+
+//class Child extends Parent implements IA {
+//    public static void main(String[] args) {
+//        new Child().show();
+//    }
+//}

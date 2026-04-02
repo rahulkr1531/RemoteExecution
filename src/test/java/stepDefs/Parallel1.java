@@ -27,6 +27,7 @@ public class Parallel1 {
     @Given("I run feature 1 step")
     public void runFeature1Step() throws InterruptedException {
 //        Thread.sleep(5000);
+//        Assert.assertTrue(false);
         printThreadDetails("Feature1 Step Execution");
     }
 }

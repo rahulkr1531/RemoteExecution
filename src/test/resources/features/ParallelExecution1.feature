@@ -1,4 +1,4 @@
-@Test4
+@Test1
 Feature: Feature 1 Thread Demo
 #
    @Test1

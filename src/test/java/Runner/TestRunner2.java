@@ -9,15 +9,15 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "@target/failed_scenarios.txt",
         glue = {"stepDefs", "Hooks"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-html-report-test2.html",
                 "json:target/cucumber-test2.json",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
-        },
-        tags = "@Test2"
+        }
+//        tags = "@Test2"
 )
 public class TestRunner2 extends AbstractTestNGCucumberTests {
     @Override
