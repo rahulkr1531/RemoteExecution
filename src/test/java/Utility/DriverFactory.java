@@ -27,7 +27,7 @@ public class DriverFactory {
         }
         if (Boolean.parseBoolean(DataUtil.getPropValue("gridRun"))) {
             try {
-                tlDriver.set(new RemoteWebDriver(new URL(Constants.gridUrl), options));
+                tlDriver.set(new RemoteWebDriver(new URL(Constants.gridUrl), new ChromeOptions()));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
