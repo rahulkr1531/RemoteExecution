@@ -25,10 +25,7 @@ public class DriverFactory {
         if (browser == null || browser.isEmpty()) {
             browser = DataUtil.getPropValue("browser");
         }
-        ChromeOptions options = new ChromeOptions();
         if (Boolean.parseBoolean(DataUtil.getPropValue("gridRun"))) {
-            options.addArguments("--headless=new");
-            options.addArguments("--window-size=1920,1080");
             try {
                 tlDriver.set(new RemoteWebDriver(new URL(Constants.gridUrl), options));
             } catch (MalformedURLException e) {
@@ -38,10 +35,22 @@ public class DriverFactory {
             if (tlDriver.get() == null) {
                 switch (browser.toUpperCase()) {
                     case "CHROME" -> {
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("--headless=new");
+                        options.addArguments("--no-sandbox");
+                        options.addArguments("--disable-dev-shm-usage");
+                        options.addArguments("--disable-gpu");
+                        options.addArguments("--window-size=1920,1080");
                         WebDriverManager.chromedriver().setup();
-                        tlDriver.set(new ChromeDriver());
+                        tlDriver.set(new ChromeDriver(options));
                     }
                     case "EDGE" -> {
+                        EdgeOptions options = new EdgeOptions();
+                        options.addArguments("--headless=new");
+                        options.addArguments("--no-sandbox");
+                        options.addArguments("--disable-dev-shm-usage");
+                        options.addArguments("--disable-gpu");
+                        options.addArguments("--window-size=1920,1080");
                         WebDriverManager.edgedriver().setup();
                         tlDriver.set(new EdgeDriver());
                     }
