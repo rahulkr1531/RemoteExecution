@@ -9,7 +9,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 @CucumberOptions(
-        features = "@target/failed_scenarios.txt",
+        features = "src/test/resources/features",
         glue = {"stepDefs", "Hooks"},
         plugin = {
                 "pretty",
